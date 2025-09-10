@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Support & Helpdesk - Pakenham Hospital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #2c5aa0 0%, #4a90bb 50%, #87ceeb 100%);
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            gap: 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-container img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid #2c5aa0;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            color: #2c5aa0;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            border: 2px solid rgba(44, 90, 160, 0.3);
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .search-bar:focus {
+            border-color: #2c5aa0;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.2);
+            background: white;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2c5aa0;
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        .emergency-contact {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .emergency-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Navigation Styles */
+        nav.horizontal-nav {
+            background: rgba(44, 90, 160, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .horizontal-nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+            padding: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .horizontal-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .horizontal-nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .horizontal-nav a:hover::before {
+            left: 100%;
+        }
+
+        .horizontal-nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #87ceeb;
+        }
+
+        .horizontal-nav a.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb a {
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            gap: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #2c5aa0;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            background: rgba(44, 90, 160, 0.1);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Support Container */
+        .support-container {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 8px 35px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .section-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .section-content {
+            padding: 3rem;
+        }
+
+        /* Support Options Grid */
+        .support-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .support-option {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .support-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            border-color: #2c5aa0;
+        }
+
+        .support-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .support-option h3 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+        }
+
+        .support-option p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Live Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(39, 174, 96, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-window {
+            display: none;
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .chat-window.active {
+            display: block;
+            animation: slideUpScale 0.3s ease-out;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .chat-body {
+            height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            background: #f8f9fa;
+        }
+
+        .chat-message {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .message-bot {
+            justify-content: flex-start;
+        }
+
+        .message-user {
+            justify-content: flex-end;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 0.8rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .message-bot .message-bubble {
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-user .message-bubble {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .chat-send {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chat-send:hover {
+            transform: scale(1.1);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .faq-search {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(44, 90, 160, 0.2);
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-search:focus {
+            outline: none;
+            border-color: #2c5aa0;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.15);
+        }
+
+        .faq-categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .faq-category {
+            padding: 0.5rem 1rem;
+            background: rgba(44, 90, 160, 0.1);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c5aa0;
+        }
+
+        .faq-category:hover,
+        .faq-category.active {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+        }
+
+        .faq-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(44, 90, 160, 0.1);
+            color: #2c5aa0;
+        }
+
+        .faq-question.active {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+        }
+
+        .faq-toggle {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 300px;
+        }
+
+        .faq-answer p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: rgba(44, 90, 160, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #2c5aa0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(44, 90, 160, 0.2);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2c5aa0;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.15);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Knowledge Base */
+        .knowledge-base {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .kb-category {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .kb-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .kb-category h3 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .kb-articles {
+            list-style: none;
+        }
+
+        .kb-articles li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .kb-articles li:last-child {
+            border-bottom: none;
+        }
+
+        .kb-articles a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .kb-articles a:hover {
+            color: #2c5aa0;
+        }
+
+        /* Ticket System */
+        .ticket-list {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .ticket-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border: 2px solid rgba(44, 90, 160, 0.1);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .ticket-item:hover {
+            border-color: #2c5aa0;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.15);
+        }
+
+        .ticket-info h4 {
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+        }
+
+        .ticket-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .ticket-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-open {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-in-progress {
+            background: #cce5ff;
+            color: #0056b3;
+        }
+
+        .status-resolved {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-closed {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        /* Resource Links */
+        .resource-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .resource-link {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .resource-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+            border-color: #2c5aa0;
+        }
+
+        .resource-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .resource-link h4 {
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-link p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-info:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid;
+        }
+
+        .alert-info {
+            background: rgba(52, 152, 219, 0.1);
+            border-color: #3498db;
+            color: #2980b9;
+        }
+
+        .alert-success {
+            background: rgba(39, 174, 96, 0.1);
+            border-color: #27ae60;
+            color: #229954;
+        }
+
+        .alert-warning {
+            background: rgba(243, 156, 18, 0.1);
+            border-color: #f39c12;
+            color: #e67e22;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .support-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .knowledge-base {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-container {
+                width: 100%;
+                max-width: none;
+                order: 3;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+            }
+
+            .horizontal-nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .horizontal-nav a {
+                padding: 0.8rem 1rem;
+                text-align: center;
+            }
+
+            .tab-navigation {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+
+            .tab-btn {
+                padding: 0.8rem 1rem;
+            }
+
+            .section-content {
+                padding: 2rem;
+            }
+
+            .support-options {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-categories {
+                flex-direction: column;
+            }
+
+            .chat-window {
+                width: 300px;
+                height: 400px;
+            }
+
+            .chat-widget {
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .resource-links {
+                grid-template-columns: 1fr;
+            }
+
+            .ticket-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpScale {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(39, 174, 96, 0.4); }
+            50% { box-shadow: 0 4px 20px rgba(39, 174, 96, 0.6); }
+            100% { box-shadow: 0 4px 20px rgba(39, 174, 96, 0.4); }
+        }
+
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="https://via.placeholder.com/70x70/2c5aa0/ffffff?text=PH" alt="Pakenham Hospital Logo" title="Pakenham Hospital">
+                <div class="logo-text">Pakenham Hospital</div>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-icon">🔍</div>
+                <input type="text" class="search-bar" placeholder="Search help topics..." aria-label="Search support content">
+            </div>
+            
+            <a href="tel:000" class="emergency-contact">🚨 Emergency: 000</a>
+        </div>
+    </header>
+
+    <nav class="horizontal-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="patient-enrollment.html">Patient Enrollment</a></li>
+            <li><a href="appointments.html">Appointment & Management</a></li>
+            <li><a href="tracking.html">Tracking & Monitoring</a></li>
+            <li><a href="support.html" class="active">Patient Support & Helpdesk</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / <span>Patient Support & Helpdesk</span>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" data-tab="support-center">🆘 Support Center</button>
+            <button class="tab-btn" data-tab="ai-assistant">🤖 AI Assistant</button>
+            <button class="tab-btn" data-tab="faq">❓ FAQ</button>
+            <button class="tab-btn" data-tab="contact">📞 Contact Us</button>
+            <button class="tab-btn" data-tab="knowledge-base">📚 Knowledge Base</button>
+            <button class="tab-btn" data-tab="my-tickets">🎫 My Tickets</button>
+        </div>
+
+        <!-- Support Center Tab -->
+        <div class="tab-content active" id="support-center">
+            <div class="support-container">
+                <div class="section-header">
+                    <h1>Patient Support & Helpdesk</h1>
+                    <p>We're here to help you 24/7 with all your healthcare needs</p>
+                </div>
+                <div class="section-content">
+                    <div class="alert alert-info">
+                        <strong>🕒 Support Hours:</strong> 24/7 Emergency Support | General Support: Mon-Fri 8AM-6PM, Sat-Sun 9AM-5PM
+                    </div>
+
+                    <!-- Support Options -->
+                    <div class="support-options">
+                        <div class="support-option">
+                            <div class="support-icon">🤖</div>
+                            <h3>AI Assistant</h3>
+                            <p>Get instant answers to common questions using our intelligent AI chatbot. Available 24/7 for immediate assistance.</p>
+                            <button class="btn btn-primary" onclick="showTab('ai-assistant')">Start AI Chat</button>
+                        </div>
+
+                        <div class="support-option">
+                            <div class="support-icon">📞</div>
+                            <h3>Call Center</h3>
+                            <p>Speak directly with our trained support representatives for personalized assistance.</p>
+                            <div style="margin: 1rem 0;">
+                                <strong>General Support:</strong><br>
+                                <a href="tel:+61395945000" style="color: #2c5aa0; font-weight: bold; font-size: 1.1rem;">📞 (03) 9594-5000</a><br>
+                                <small>Mon-Fri 8AM-6PM, Sat-Sun 9AM-5PM</small>
+                            </div>
+                            <div style="margin: 1rem 0;">
+                                <strong>Emergency Line:</strong><br>
+                                <a href="tel:000" style="color: #e74c3c; font-weight: bold; font-size: 1.1rem;">🚨 000</a><br>
+                                <small>24/7 Emergency Support</small>
+                            </div>
+                            <button class="btn btn-success" onclick="window.open('tel:+61395945000')">Call Now</button>
+                        </div>
+
+                        <div class="support-option">
+                            <div class="support-icon">💬</div>
+                            <h3>Live Chat</h3>
+                            <p>Chat with our support team in real-time for quick assistance with your questions.</p>
+                            <button class="btn btn-info" onclick="toggleChat()">Start Live Chat</button>
+                        </div>
+
+                        <div class="support-option">
+                            <div class="support-icon">📧</div>
+                            <h3>Email Support</h3>
+                            <p>Send us a detailed message and we'll respond within 24 hours during business days.</p>
+                            <button class="btn btn-primary" onclick="showTab('contact')">Send Email</button>
+                        </div>
+
+                        <div class="support-option">
+                            <div class="support-icon">🎫</div>
+                            <h3>Support Tickets</h3>
+                            <p>Create and track support tickets for complex issues that require detailed follow-up.</p>
+                            <button class="btn btn-info" onclick="showTab('my-tickets')">View Tickets</button>
+                        </div>
+
+                        <div class="support-option">
+                            <div class="support-icon">📱</div>
+                            <h3>Mobile App Support</h3>
+                            <p>Get help with our mobile app, including downloads, login issues, and feature guidance.</p>
+                            <button class="btn btn-primary">App Support</button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Access Resources -->
+                    <div class="resource-links">
+                        <a href="#" class="resource-link">
+                            <div class="resource-icon">🏥</div>
+                            <h4>Hospital Directory</h4>
+                            <p>Find departments, doctors, and facilities</p>
+                        </a>
+                        <a href="#" class="resource-link">
+                            <div class="resource-icon">📅</div>
+                            <h4>Appointment Help</h4>
+                            <p>Booking, rescheduling, and cancellation</p>
+                        </a>
+                        <a href="#" class="resource-link">
+                            <div class="resource-icon">💳</div>
+                            <h4>Billing & Insurance</h4>
+                            <p>Payment options and insurance claims</p>
+                        </a>
+                        <a href="#" class="resource-link">
+                            <div class="resource-icon">📋</div>
+                            <h4>Medical Records</h4>
+                            <p>Access and manage your health records</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Assistant Tab -->
+        <div class="tab-content" id="ai-assistant">
+            <div class="support-container">
+                <div class="section-header">
+                    <h1>AI Healthcare Assistant</h1>
+                    <p>Get instant answers to your healthcare questions with our intelligent AI assistant</p>
+                </div>
+                <div class="section-content">
+                    <div class="alert alert-info">
+                        <strong>🤖 AI Assistant Features:</strong> Appointment scheduling, symptom checking, medication information, and general healthcare guidance. For emergencies, please call 000 immediately.
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; height: 600px;">
+                        <!-- AI Chat Interface -->
+                        <div style="background: white; border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column;">
+                            <div style="background: linear-gradient(135deg, #2c5aa0, #4a90bb); color: white; padding: 1.5rem; border-radius: 15px 15px 0 0;">
+                                <h3>🤖 Healthcare AI Assistant</h3>
+                                <p style="margin: 0; opacity: 0.9;">Ask me anything about your healthcare needs</p>
+                            </div>
+                            
+                            <div id="ai-chat-messages" style="flex: 1; padding: 1.5rem; overflow-y: auto; background: #f8f9fa;">
+                                <div class="chat-message message-bot">
+                                    <div class="message-bubble">
+                                        👋 Hello! I'm your AI Healthcare Assistant. I can help you with:
+                                        <br><br>
+                                        • Appointment scheduling and management
+                                        <br>• General health questions
+                                        <br>• Medication information
+                                        <br>• Hospital services and departments
+                                        <br>• Billing and insurance queries
+                                        <br><br>
+                                        How can I assist you today?
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="padding: 1.5rem; border-top: 1px solid #e0e0e0; background: white; border-radius: 0 0 15px 15px;">
+                                <div style="display: flex; gap: 1rem;">
+                                    <input type="text" id="ai-input" placeholder="Type your question here..." style="flex: 1; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 25px; outline: none;">
+                                    <button onclick="sendAIMessage()" style="background: linear-gradient(135deg, #2c5aa0, #4a90bb); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 1.2rem;">➤</button>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap;">
+                                    <button class="btn btn-primary btn-small" onclick="sendQuickQuestion('How do I book an appointment?')">Book Appointment</button>
+                                    <button class="btn btn-primary btn-small" onclick="sendQuickQuestion('What are your visiting hours?')">Visiting Hours</button>
+                                    <button class="btn btn-primary btn-small" onclick="sendQuickQuestion('How do I access my test results?')">Test Results</button>
+                                    <button class="btn btn-primary btn-small" onclick="sendQuickQuestion('What insurance do you accept?')">Insurance Info</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Features Panel -->
+                        <div style="background: white; border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); padding: 2rem;">
+                            <h3 style="color: #2c5aa0; margin-bottom: 1.5rem;">🎯 AI Capabilities</h3>
+                            
+                            <div style="margin-bottom: 2rem;">
+                                <h4 style="color: #333; margin-bottom: 1rem;">🏥 Hospital Services</h4>
+                                <ul style="color: #666; line-height: 1.8;">
+                                    <li>Department information</li>
+                                    <li>Doctor availability</li>
+                                    <li>Facility locations</li>
+                                    <li>Service hours</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 2rem;">
+                                <h4 style="color: #333; margin-bottom: 1rem;">📅 Appointments</h4>
+                                <ul style="color: #666; line-height: 1.8;">
+                                    <li>Schedule appointments</li>
+                                    <li>Reschedule or cancel</li>
+                                    <li>Check availability</li>
+                                    <li>Appointment reminders</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 2rem;">
+                                <h4 style="color: #333; margin-bottom: 1rem;">🩺 Health Information</h4>
+                                <ul style="color: #666; line-height: 1.8;">
+                                    <li>General health guidance</li>
+                                    <li>Medication information</li>
+                                    <li>Symptom assessment</li>
+                                    <li>Preventive care tips</li>
+                                </ul>
+                            </div>
+
+                            <div class="alert alert-warning" style="margin-top: 2rem;">
+                                <strong>⚠️ Important:</strong> This AI assistant provides general information only. For medical emergencies, call 000. For urgent medical concerns, consult with a healthcare professional.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Tab -->
+        <div class="tab-content" id="faq">
+            <div class="support-container">
+                <div class="section-header">
+                    <h1>Frequently Asked Questions</h1>
+                    <p>Find quick answers to common questions about our services</p>
+                </div>
+                <div class="section-content">
+                    <div class="faq-section">
+                        <input type="text" class="faq-search" placeholder="🔍 Search FAQs..." id="faqSearch">
+                        
+                        <div class="faq-categories">
+                            <div class="faq-category active" data-category="all">All</div>
+                            <div class="faq-category" data-category="appointments">Appointments</div>
+                            <div class="faq-category" data-category="billing">Billing</div>
+                            <div class="faq-category" data-category="services">Services</div>
+                            <div class="faq-category" data-category="records">Medical Records</div>
+                            <div class="faq-category" data-category="emergency">Emergency</div>
+                        </div>
+
+                        <div id="faqList">
+                            <div class="faq-item" data-category="appointments">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    How do I book an appointment?
+                                    <span class="faq-toggle">▼</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>You can book an appointment through several methods:</p>
+                                    <p><strong>Online:</strong> Use our patient portal or website booking system available 24/7</p>
+                                    <p><strong>Phone:</strong> Call our appointment line at (03) 9594-5000 during business hours</p>
+                                    <p><strong>Mobile App:</strong> Download our mobile app for convenient booking</p>
+                                    <p><strong>In Person:</strong> Visit our reception desk during hospital hours</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item" data-category="billing">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    What insurance plans do you accept?
+                                    <span class="faq-toggle">▼</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>We accept most major insurance plans including:</p>
+                                    <p>• Medicare and Medicaid</p>
+                                    <p>• Private health insurance (Bupa, Medibank, HCF, etc.)</p>
+                                    <p>• Workers' compensation</p>
+                                    <p>• Motor vehicle accident claims</p>
+                                    <p>Please contact our billing department at (03) 9594-5000 to verify your specific coverage.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item" data-category="emergency">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    When should I go to the emergency room?
+                                    <span class="faq-toggle">▼</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Visit the emergency room immediately for:</p>
+                                    <p>• Chest pain or difficulty breathing</p>
+                                    <p>• Severe injuries or trauma</p>
+                                    <p>• Signs of stroke or heart attack</p>
+                                    <p>• Severe allergic reactions</p>
+                                    <p>• Loss of consciousness</p>
+                                    <p>• Severe bleeding</p>
+                                    <p><strong>For life-threatening emergencies, call 000 immediately.</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item" data-category="services">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    What are your visiting hours?
+                                    <span class="faq-toggle">▼</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <p><strong>General Visiting Hours:</strong></p>
+                                    <p>• Monday to Sunday: 10:00 AM - 8:00 PM</p>
+                                    <p><strong>ICU Visiting Hours:</strong></p>
+                                    <p>• Daily: 2:00 PM - 4:00 PM and 6:00 PM - 8:00 PM</p>
+                                    <p><strong>Maternity Ward:</strong></p>
+                                    <p>• Partners: 24/7 access</p>
+                                    <p>• Other visitors: 10:00 AM - 8:00 PM</p>
+                                    <p>Please note that visiting hours may be restricted during certain circumstances.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item" data-category="records">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    How can I access my medical records?
+                                    <span class="faq-toggle">▼</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>You can access your medical records through:</p>
+                                    <p><strong>Patient Portal:</strong> Login to your online account to view test results, medications, and visit summaries</p>
+                                    <p><strong>Mobile App:</strong> Download our app for convenient access to your health information</p>
+                                    <p><strong>Request Copies:</strong> Contact Medical Records at (03) 9594-5000 to request printed copies</p>
+                                    <p>You'll need to provide valid identification and may need to complete a release form.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item" data-category="appointments">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    How do I cancel or reschedule my appointment?
+                                    <span class="faq-toggle">▼</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>To cancel or reschedule your appointment:</p>
+                                    <p><strong>Online:</strong> Use your patient portal or our website</p>
+                                    <p><strong>Phone:</strong> Call (03) 9594-5000 at least 24 hours in advance</p>
+                                    <p><strong>Mobile App:</strong> Use our app's appointment management feature</p>
+                                    <p>Please provide at least 24 hours notice to avoid cancellation fees and to allow other patients to use the appointment slot.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item" data-category="billing">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    How can I pay my medical bills?
+                                    <span class="faq-toggle">▼</span>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>We offer several convenient payment options:</p>
+                                    <p><strong>Online:</strong> Pay through our secure patient portal</p>
+                                    <p><strong>Phone:</strong> Call our billing department at (03) 9594-5000</p>
+                                    <p><strong>Mail:</strong> Send check or money order to our billing address</p>
+                                    <p><strong>In Person:</strong> Pay at our reception desk</p>
+                                    <p>We accept cash, checks, credit cards, and offer payment plans for larger amounts.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Us Tab -->
+        <div class="tab-content" id="contact">
+            <div class="support-container">
+                <div class="section-header">
+                    <h1>Contact Us</h1>
+                    <p>Get in touch with our support team for personalized assistance</p>
+                </div>
+                <div class="section-content">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem;">
+                        <!-- Contact Form -->
+                        <div class="contact-form">
+                            <h3 style="margin-bottom: 1.5rem; color: #2c5aa0;">📧 Send us a Message</h3>
+                            <form id="contactForm">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="firstName">First Name <span class="required">*</span></label>
+                                        <input type="text" id="firstName" name="firstName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName">Last Name <span class="required">*</span></label>
+                                        <input type="text" id="lastName" name="lastName" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="email">Email <span class="required">*</span></label>
+                                        <input type="email" id="email" name="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="tel" id="phone" name="phone">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="patientId">Patient ID (if applicable)</label>
+                                    <input type="text" id="patientId" name="patientId" placeholder="PH-123456789">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inquiryType">Type of Inquiry <span class="required">*</span></label>
+                                    <select id="inquiryType" name="inquiryType" required>
+                                        <option value="">Select Inquiry Type</option>
+                                        <option value="appointment">Appointment Related</option>
+                                        <option value="billing">Billing & Insurance</option>
+                                        <option value="medical-records">Medical Records</option>
+                                        <option value="technical">Technical Support</option>
+                                        <option value="complaint">Complaint or Feedback</option>
+                                        <option value="general">General Inquiry</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="priority">Priority Level</label>
+                                    <select id="priority" name="priority">
+                                        <option value="low">Low - General inquiry</option>
+                                        <option value="medium" selected>Medium - Standard response needed</option>
+                                        <option value="high">High - Urgent attention required</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="message">Message <span class="required">*</span></label>
+                                    <textarea id="message" name="message" placeholder="Please describe your inquiry in detail..." required></textarea>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                        <input type="checkbox" required>
+                                        I agree to the <a href="#" style="color: #2c5aa0;">privacy policy</a> and terms of service <span class="required">*</span>
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                            </form>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div>
+                            <div style="background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); margin-bottom: 2rem;">
+                                <h3 style="color: #2c5aa0; margin-bottom: 1.5rem;">📞 Call Center</h3>
+                                
+                                <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(44, 90, 160, 0.05); border-radius: 10px; border-left: 4px solid #2c5aa0;">
+                                    <strong>General Support</strong><br>
+                                    <a href="tel:+61395945000" style="color: #2c5aa0; font-weight: bold; font-size: 1.2rem; text-decoration: none;">📞 (03) 9594-5000</a><br>
+                                    <small style="color: #666;">Mon-Fri: 8AM-6PM<br>Sat-Sun: 9AM-5PM</small>
+                                </div>
+
+                                <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(231, 76, 60, 0.05); border-radius: 10px; border-left: 4px solid #e74c3c;">
+                                    <strong>Emergency Line</strong><br>
+                                    <a href="tel:000" style="color: #e74c3c; font-weight: bold; font-size: 1.2rem; text-decoration: none;">🚨 000</a><br>
+                                    <small style="color: #666;">24/7 Emergency Support</small>
+                                </div>
+
+                                <div style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(39, 174, 96, 0.05); border-radius: 10px; border-left: 4px solid #27ae60;">
+                                    <strong>Appointment Booking</strong><br>
+                                    <a href="tel:+61395945001" style="color: #27ae60; font-weight: bold; font-size: 1.1rem; text-decoration: none;">📅 (03) 9594-5001</a><br>
+                                    <small style="color: #666;">24/7 Automated Booking</small>
+                                </div>
+
+                                <button class="btn btn-success" style="width: 100%;" onclick="window.open('tel:+61395945000')">
+                                    📞 Call Support Now
+                                </button>
+                            </div>
+
+                            <div style="background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
+                                <h3 style="color: #2c5aa0; margin-bottom: 1.5rem;">📍 Visit Us</h3>
+                                <p style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
+                                    <strong>Pakenham Hospital</strong><br>
+                                    123 Healthcare Drive<br>
+                                    Pakenham VIC 3810<br>
+                                    Australia
+                                </p>
+                                <p style="color: #666; line-height: 1.6; margin-bottom: 1.5rem;">
+                                    <strong>📧 Email:</strong> support@pakenhamhospital.com.au<br>
+                                    <strong>🌐 Website:</strong> www.pakenhamhospital.com.au
+                                </p>
+                                <button class="btn btn-info" style="width: 100%;">🗺️ Get Directions</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Knowledge Base Tab -->
+        <div class="tab-content" id="knowledge-base">
+            <div class="support-container">
+                <div class="section-header">
+                    <h1>Knowledge Base</h1>
+                    <p>Comprehensive guides and resources for patients and families</p>
+                </div>
+                <div class="section-content">
+                    <div class="knowledge-base">
+                        <div class="kb-category">
+                            <h3>🏥 Hospital Services</h3>
+                            <ul class="kb-articles">
+                                <li><a href="#">Emergency Department Guide</a></li>
+                                <li><a href="#">Outpatient Services Overview</a></li>
+                                <li><a href="#">Surgical Services Information</a></li>
+                                <li><a href="#">Laboratory & Imaging Services</a></li>
+                                <li><a href="#">Specialty Clinics Directory</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="kb-category">
+                            <h3>👤 Patient Information</h3>
+                            <ul class="kb-articles">
+                                <li><a href="#">Patient Rights & Responsibilities</a></li>
+                                <li><a href="#">Privacy & Confidentiality</a></li>
+                                <li><a href="#">Advance Directives</a></li>
+                                <li><a href="#">Patient Safety Guidelines</a></li>
+                                <li><a href="#">Discharge Planning Process</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="kb-category">
+                            <h3>💳 Billing & Insurance</h3>
+                            <ul class="kb-articles">
+                                <li><a href="#">Understanding Your Bill</a></li>
+                                <li><a href="#">Insurance Coverage Guide</a></li>
+                                <li><a href="#">Payment Options & Plans</a></li>
+                                <li><a href="#">Medicare & Medicaid Information</a></li>
+                                <li><a href="#">Financial Assistance Programs</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="kb-category">
+                            <h3>📱 Technology Help</h3>
+                            <ul class="kb-articles">
+                                <li><a href="#">Patient Portal Setup Guide</a></li>
+                                <li><a href="#">Mobile App User Manual</a></li>
+                                <li><a href="#">Online Appointment Booking</a></li>
+                                <li><a href="#">Accessing Test Results Online</a></li>
+                                <li><a href="#">Troubleshooting Common Issues</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="kb-category">
+                            <h3>👨‍⚕️ Preparing for Your Visit</h3>
+                            <ul class="kb-articles">
+                                <li><a href="#">What to Bring to Your Appointment</a></li>
+                                <li><a href="#">Pre-Surgery Instructions</a></li>
+                                <li><a href="#">Medication Management</a></li>
+                                <li><a href="#">Parking & Transportation</a></li>
+                                <li><a href="#">Visitor Guidelines</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="kb-category">
+                            <h3>🆘 Emergency Information</h3>
+                            <ul class="kb-articles">
+                                <li><a href="#">When to Seek Emergency Care</a></li>
+                                <li><a href="#">Emergency Department

@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment & Management - Pakenham Hospital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #2c5aa0 0%, #4a90bb 50%, #87ceeb 100%);
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            gap: 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-container img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid #2c5aa0;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            color: #2c5aa0;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            border: 2px solid rgba(44, 90, 160, 0.3);
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .search-bar:focus {
+            border-color: #2c5aa0;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.2);
+            background: white;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2c5aa0;
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        .emergency-contact {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .emergency-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Navigation Styles */
+        nav.horizontal-nav {
+            background: rgba(44, 90, 160, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .horizontal-nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+            padding: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .horizontal-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .horizontal-nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .horizontal-nav a:hover::before {
+            left: 100%;
+        }
+
+        .horizontal-nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #87ceeb;
+        }
+
+        .horizontal-nav a.active {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb a {
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            gap: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #2c5aa0;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            background: rgba(44, 90, 160, 0.1);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Appointment Container */
+        .appointment-container {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 8px 35px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .section-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .section-content {
+            padding: 3rem;
+        }
+
+        /* Booking Form Styles */
+        .booking-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .booking-form {
+            background: rgba(44, 90, 160, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #2c5aa0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(44, 90, 160, 0.2);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2c5aa0;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.15);
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .time-slot {
+            padding: 0.8rem;
+            border: 2px solid rgba(44, 90, 160, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .time-slot:hover {
+            border-color: #2c5aa0;
+            background: rgba(44, 90, 160, 0.1);
+        }
+
+        .time-slot.selected {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+            border-color: #2c5aa0;
+        }
+
+        .time-slot.unavailable {
+            background: #f8f9fa;
+            color: #999;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        /* Available Slots Preview */
+        .available-slots {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .doctor-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            border: 2px solid rgba(44, 90, 160, 0.1);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .doctor-card:hover {
+            border-color: #2c5aa0;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.15);
+        }
+
+        .doctor-card.selected {
+            border-color: #2c5aa0;
+            background: rgba(44, 90, 160, 0.05);
+        }
+
+        .doctor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .doctor-info h4 {
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+        }
+
+        .doctor-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Appointment Cards */
+        .appointments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .appointment-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #2c5aa0;
+            transition: all 0.3s ease;
+        }
+
+        .appointment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .appointment-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .appointment-date {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .appointment-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-completed {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+
+        .appointment-details h4 {
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+        }
+
+        .appointment-details p {
+            color: #666;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .appointment-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+            box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            color: white;
+            box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(149, 165, 166, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        /* Calendar Widget */
+        .calendar-widget {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-nav {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #2c5aa0;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-nav:hover {
+            background: rgba(44, 90, 160, 0.1);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .calendar-day.header {
+            color: #2c5aa0;
+            font-weight: 600;
+            cursor: default;
+        }
+
+        .calendar-day:not(.header):hover {
+            background: rgba(44, 90, 160, 0.1);
+        }
+
+        .calendar-day.selected {
+            background: linear-gradient(135deg, #2c5aa0, #4a90bb);
+            color: white;
+        }
+
+        .calendar-day.has-appointment {
+            background: rgba(39, 174, 96, 0.2);
+            color: #27ae60;
+        }
+
+        .calendar-day.unavailable {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Statistics Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-left: 5px solid #2c5aa0;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .booking-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .appointments-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-container {
+                width: 100%;
+                max-width: none;
+                order: 3;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+            }
+
+            .horizontal-nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .horizontal-nav a {
+                padding: 0.8rem 1rem;
+                text-align: center;
+            }
+
+            .tab-navigation {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+
+            .tab-btn {
+                padding: 0.8rem 1rem;
+            }
+
+            .section-content {
+                padding: 2rem;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .appointment-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(44, 90, 160, 0.3);
+            border-radius: 50%;
+            border-top-color: #2c5aa0;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="https://via.placeholder.com/70x70/2c5aa0/ffffff?text=PH" alt="Pakenham Hospital Logo" title="Pakenham Hospital">
+                <div class="logo-text">Pakenham Hospital</div>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-icon">🔍</div>
+                <input type="text" class="search-bar" placeholder="Search appointments, doctors..." aria-label="Search appointments">
+            </div>
+            
+            <a href="tel:000" class="emergency-contact">🚨 Emergency: 000</a>
+        </div>
+    </header>
+
+    <nav class="horizontal-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="patient-enrollment.html">Patient Enrollment</a></li>
+            <li><a href="appointments.html" class="active">Appointment & Management</a></li>
+            <li><a href="tracking.html">Tracking & Monitoring</a></li>
+            <li><a href="support.html">Patient Support & Helpdesk</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> / <span>Appointment & Management</span>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" data-tab="book-appointment">📅 Book Appointment</button>
+            <button class="tab-btn" data-tab="my-appointments">📋 My Appointments</button>
+            <button class="tab-btn" data-tab="reschedule">🔄 Reschedule</button>
+            <button class="tab-btn" data-tab="appointment-history">📊 History</button>
+        </div>
+
+        <!-- Book Appointment Tab -->
+        <div class="tab-content active" id="book-appointment">
+            <div class="appointment-container">
+                <div class="section-header">
+                    <h1>Book Your Appointment</h1>
+                    <p>Schedule your visit with our healthcare professionals</p>
+                </div>
+                <div class="section-content">
+                    <!-- Statistics -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Available Doctors</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">25+</div>
+                            <div class="stat-label">Specialties</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Satisfaction Rate</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Emergency Care</div>
+                        </div>
+                    </div>
+
+                    <div class="booking-grid">
+                        <div class="booking-form">
+                            <h3>Appointment Details</h3>
+                            <form id="appointmentForm">
+                                <div class="form-group">
+                                    <label for="patientId">Patient ID <span class="required">*</span></label>
+                                    <input type="text" id="patientId" name="patientId" required placeholder="PH-123456789">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="appointmentType">Appointment Type <span class="required">*</span></label>
+                                    <select id="appointmentType" name="appointmentType" required>
+                                        <option value="">Select Type</option>
+                                        <option value="consultation">General Consultation</option>
+                                        <option value="follow-up">Follow-up</option>
+                                        <option value="specialist">Specialist Consultation</option>
+                                        <option value="emergency">Emergency</option>
+                                        <option value="procedure">Medical Procedure</option>
+                                        <option value="screening">Health Screening</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="department">Department <span class="required">*</span></label>
+                                    <select id="department" name="department" required>
+                                        <option value="">Select Department</option>
+                                        <option value="general">General Medicine</option>
+                                        <option value="cardiology">Cardiology</option>
+                                        <option value="orthopedics">Orthopedics</option>
+                                        <option value="pediatrics">Pediatrics</option>
+                                        <option value="gynecology">Gynecology</option>
+                                        <option value="neurology">Neurology</option>
+                                        <option value="dermatology">Dermatology</option>
+                                        <option value="psychiatry">Psychiatry</option>
+                                        <option value="surgery">General Surgery</option>
+                                        <option value="emergency">Emergency</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="preferredDate">Preferred Date <span class="required">*</span></label>
+                                    <input type="date" id="preferredDate" name="preferredDate" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Available Time Slots</label>
+                                    <div class="time-slots" id="timeSlots">
+                                        <div class="time-slot" data-time="09:00">09:00 AM</div>
+                                        <div class="time-slot" data-time="10:00">10:00 AM</div>
+                                        <div class="time-slot unavailable" data-time="11:00">11:00 AM</div>
+                                        <div class="time-slot" data-time="12:00">12:00 PM</div>
+                                        <div class="time-slot" data-time="14:00">02:00 PM</div>
+                                        <div class="time-slot" data-time="15:00">03:00 PM</div>
+                                        <div class="time-slot unavailable" data-time="16:00">04:00 PM</div>
+                                        <div class="time-slot" data-time="17:00">05:00 PM</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="reason">Reason for Visit</label>
+                                    <textarea id="reason" name="reason" placeholder="Brief description of your symptoms or reason for the visit..."></textarea>
+                                </div>
+
+                                <div class="form-group">
