@@ -1,0 +1,107 @@
+body {
+  margin: 0;
+  height: 100vh;              /* full screen height */
+  display: flex;              /* enable flexbox */
+  justify-content: center;    /* center horizontally */
+  align-items: center;        /* center vertically */
+  background: #f9f9f9;        /* light background */
+  font-family: Arial, sans-serif;
+}
+
+/* Bordered form */
+form {
+ 
+  background: #fff;
+  border: 3px solid #f1f1f1;
+  box-shadow: 1rem 1rem 4rem rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 400px;           /* keeps form small on big screens */
+
+  .skip{
+   display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  }
+
+  .skip a{
+    text-decoration: none;
+    font-weight:bold;
+    color: black;
+  }
+
+  .skip a:hover{
+    color: orange;
+  }
+
+
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    background-color: orange;
+  opacity: 0.8;
+}
+
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+}
+
+/* The "Forgot password" text */
+
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 480px) {
+  .cancelbtn {
+    width: 100%;
+  }
+  span.psw {
+    display: block;
+    float: none;
+    margin-top: 10px;
+    text-decoration: none;
+  }
+}
