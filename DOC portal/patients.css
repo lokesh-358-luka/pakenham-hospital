@@ -1,0 +1,115 @@
+body{
+    background-color: rgb(221, 241, 255);
+    margin: 0 0 0;
+}
+.back{
+    margin: 2rem;
+}
+.nav{
+    background-color: white;
+}
+
+.patient-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: bisque;
+color: black;}
+
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.controls input, .controls select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f1f5f9;
+}
+
+thead th {
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+tbody td {
+  padding: 12px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar.blue { background: #3b82f6; }
+.avatar.pink { background: #ec4899; } 
+.avatar.green{background: greenyellow;}
+.avatar.red{background: red;}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status.active {
+  background: #d1fae5;
+  color: #059669;
+}
+
+a {
+  text-decoration: none;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+

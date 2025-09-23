@@ -1,0 +1,153 @@
+<html>
+    <head>
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width= device-width, initial-scale=1.0" />
+       <link rel="stylesheet" href="doctor.css">
+       <link rel="stylesheet" href="patients.css">
+       <link rel="icon" type="image/png" href="logo.png">
+        <title>Doctor-Portal</title>
+    </head>
+    <body>
+        <!-- heading 1 -->
+         <div class="nav">
+         <div class="heading1">
+            <div class="style">
+            <img src="logo.png" alt="Loading" height="50" width="50">
+            <ul>
+                <li class="bold">Pakenham Hospital</li>
+                <li>Doctor Dashboard</li>
+            </ul>
+        </div>
+         <button class="Sign-In"><a href="/index.html">Sign-In</a></button>
+        </div>
+        <hr>
+
+    <!-- heading 2-->
+     <div class="heading2">
+        <ul class="second-heading">
+            <li><a href="doctor.html"> Dashboard</a></li>
+            <li><a href="patients.html">Patients</a></li>
+            <li><a href="doc-appointments.html">Appointments</a></li>
+            <li><a href="pescribtion.html">Prescriptions</li>
+            <li><a href="doc-report.html">Reports</li>
+        </ul>
+     </div>
+     <hr>
+         </div>
+     <div class="back">
+  <div class="patient-container">
+    <div class="header">
+      <h2>Patient Management</h2>
+      <button class="add-btn">Add New Patient</button>
+    </div>
+
+    <!-- Search and Filter -->
+    <div class="controls">
+      <input type="text" placeholder="Search patients...">
+      <select>
+        <option>All Patients</option>
+        <option>Active</option>
+        <option>Inactive</option>
+      </select>
+    </div>
+
+    <!-- Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Patient</th>
+          <th>Age</th>
+          <th>Last Visit</th>
+          <th>Condition</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>
+            <div class="patient-info">
+              <div class="avatar blue">PP</div>
+              <div>
+                <strong>Pradip Parajuli</strong><br>
+                <small>pradip.parajuli@gmail.com</small>
+              </div>
+            </div>
+          </td>
+          <td>45</td>
+          <td>Dec 15, 2023</td>
+          <td>Hypertension</td>
+          <td><span class="status active">Active</span></td>
+          <td>
+            <a href="#">View</a> | <a href="#">Edit</a>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="patient-info">
+              <div class="avatar pink">SS</div>
+              <div>
+                <strong> Sachin Shrestha</strong><br>
+                <small>sachin.shrestha@email.com</small>
+              </div>
+            </div>
+          </td>
+          <td>32</td>
+          <td>Dec 18, 2023</td>
+          <td>Fit & Healthy</td>
+          <td><span class="status active">Active</span></td>
+          <td>
+            <a href="#">View</a> | <a href="#">Edit</a>
+          </td>
+        </tr>
+
+         <tr>
+          <td>
+            <div class="patient-info">
+              <div class="avatar red">LT</div>
+              <div>
+                <strong> Lokesh Thapa</strong><br>
+                <small>lokesh.thapa@email.com</small>
+              </div>
+            </div>
+          </td>
+          <td>32</td>
+          <td>Dec 18, 2023</td>
+          <td>Fit & Healthy</td>
+          <td><span class="status active">Active</span></td>
+          <td>
+            <a href="#">View</a> | <a href="#">Edit</a>
+          </td>
+        </tr>
+
+         <tr>
+          <td>
+            <div class="patient-info">
+              <div class="avatar green">SM</div>
+              <div>
+                <strong> Sunil Mahat</strong><br>
+                <small>sunil.mahat@email.com</small>
+              </div>
+            </div>
+          </td>
+          <td>32</td>
+          <td>Dec 18, 2023</td>
+          <td>Vitamins Deficinency</td>
+          <td><span class="status active">Active</span></td>
+          <td>
+            <a href="#">View</a> | <a href="#">Edit</a>
+          </td>
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+     </div>
+
+
+
+    </body>
+</html>

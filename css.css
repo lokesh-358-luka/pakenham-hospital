@@ -1,10 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .notification { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+
 body {
   margin: 0;
   height: 100vh;              /* full screen height */
   display: flex;              /* enable flexbox */
   justify-content: center;    /* center horizontally */
   align-items: center;        /* center vertically */
-  background: #f9f9f9;        /* light background */
+  background: rgb(231, 246, 252) ;     /* light background */
   font-family: Arial, sans-serif;
 }
 
@@ -104,4 +112,32 @@ img.avatar {
     margin-top: 10px;
     text-decoration: none;
   }
+}
+
+.portal{
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  padding: 30px;
+  row-gap: 1rem;
+
+}
+
+.card{
+  background: white;
+  padding: 15px;
+  border-radius: 1rem;
+  box-shadow: 0 2px 9px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card a{
+  text-decoration: none;
+  color: black;
+}
+
+.card:hover{
+  background: wheat;
+  color: black;
+   transform: translateY(-8px) scale(1.03); /* Pop out */
 }

@@ -1,0 +1,103 @@
+<html>
+    <head>
+       <meta charset="UTF-8" />
+       <meta name="viewport" content="width= device-width, initial-scale=1.0" />
+       <link rel="stylesheet" href="doctor.css">
+       <link rel="stylesheet" href="doc-reports.css">
+       <link rel="icon" type="image/png" href="logo.png">
+        <title>Doctor-Portal</title>
+    </head>
+    <body>
+        <!-- heading 1 -->
+         <nav>
+         <div class="heading1">
+            <div class="style">
+            <img src="logo.png" alt="Loading" height="50" width="50">
+            <ul>
+                <li class="bold">Pakenham Hospital</li>
+                <li>Doctor Dashboard</li>
+            </ul>
+        </div>
+         <button class="Sign-In"><a href="/index.html">Sign-In</a></button>
+        </div>
+        <hr>
+
+    <!-- heading 2-->
+     <div class="heading2">
+        <ul class="second-heading">
+            <li><a href="doctor.html"> Dashboard</a></li>
+            <li><a href="patients.html">Patients</a></li>
+            <li><a href="doc-appointments.html">Appointments</a></li>
+            <li><a href="pescribtion.html">Prescriptions</li>
+            <li><a href="doc-report.html">Reports</li>
+        </ul>
+     </div>
+     <hr>
+         </nav>
+
+<!-- reports -->
+<div class="reports-records-container">
+  <!-- Lab Reports -->
+  <div class="card-section">
+    <h3>Lab Reports</h3>
+
+    <div class="report-card">
+      <div>
+        <strong>Blood Test - Ram Prasad Kumal</strong><br>
+        <span>Complete Blood Count</span><br>
+        <small>Dec 14, 2023</small>
+      </div>
+      <span class="status pending">Pending Review</span>
+      <div class="actions">
+        <button class="btn blue">Review</button>
+        <a href="#">Download</a>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <div>
+        <strong>X-Ray - Isura Nirmal</strong><br>
+        <span>Chest X-Ray</span><br>
+        <small>Dec 13, 2023</small>
+      </div>
+      <span class="status reviewed">Reviewed</span>
+      <div class="actions">
+        <a href="#">View</a>
+        <a href="#">Download</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Medical Records -->
+  <div class="card-section">
+    <h3>Medical Records</h3>
+
+    <div class="record-card">
+      <div>
+        <strong>Patient Visit Summary</strong><br>
+        <small>Generate comprehensive visit reports</small>
+      </div>
+      <button class="btn blue">Generate Report</button>
+    </div>
+
+    <div class="record-card">
+      <div>
+        <strong>Treatment History</strong><br>
+        <small>View patient treatment timeline</small>
+      </div>
+      <button class="btn green">View History</button>
+    </div>
+
+    <div class="record-card">
+      <div>
+        <strong>Discharge Summary</strong><br>
+        <small>Create patient discharge documents</small>
+      </div>
+      <button class="btn purple">Create Summary</button>
+    </div>
+  </div>
+</div>
+
+
+    </body>
+</html>

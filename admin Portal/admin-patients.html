@@ -1,0 +1,189 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+       <meta name="viewport" content="width= device-width, initial-scale=1.0" />
+       <link rel="icon" type="image/png" href="logo.png">
+       <link rel="stylesheet" href="admin.css">
+       <link rel="stylesheet" href="ad-patients.css">
+<title>Admin Portal</title>
+</head>
+<body>
+    <div class="nav">
+        <ul class="nav1">
+       <li class="nava">
+        <img src="logo.png" alt="Loading" height="40" width="40">
+       <h2>Packenham Admin</h2></li>
+         <li class="navb"> 
+        <div class="avatar blue">PP</div>
+              <div>
+                <strong>Pradip Parajuli</strong><br>
+                <small>pradip.parajuli@gmail.com</small>
+              </div>
+        </ul>
+
+        <hr>
+    </div>
+
+<div class="whole">
+<!-- side bar -->
+ <div class="sidebar">
+    <h2>Dashboard</h2>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="admin-patients.html">Patients</a></li>
+      <li><a href="admin-doc.html">Doctors</a></li>
+      <li><a href="appoint.html">Appointments</a></li>
+      <li><a href="staff.html">Staff Management</a></li>
+      <li><a href="departments.html">Departments</a></li>
+      <li><a href="reports.html">Reports</a></li>
+      <li><a href="settings.html">Settings</a></li>
+    </ul>
+  </div>
+
+  <!-- main content -->
+   <div class="main-content">
+    <header class="header">
+        <div>
+        <h1>Patients Overview</h1>
+        <p>Welcome back! Here's what's happening at your hospital today.</p>
+        </div>
+        <div class="add">
+            Add New Patients
+        </div>
+    </header>
+
+    <div class="search">
+        <input type="text" name="" id="patient search" placeholder="search patients...">
+        <select name="All Departments" id="">
+           <option value=""> Select Departments</option>
+            <option value="cardiology">Cardiology</option>
+            <option value="neurology">Neurology</option>
+            <option value="orthopedics">Orthopedics</option>
+            <option value="pediatrics">Pediatrics</option>
+            <option value="dermatology">Dermatology</option>
+            <option value="radiology">Radiology</option>
+            <option value="general">General Medicine</option>
+
+
+        </select>
+    </div>
+<br>
+<br>
+    <!-- table -->
+     <table>
+      <thead>
+        <tr>
+          <th>Patient ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Departments</th>
+          <th>last Visit</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            #11456
+          </td>
+          <td>Pradip Parajuli</td>
+          <td>23</td>
+          <td>Cardiology</td>
+          <td>Dec 15, 2023</td>
+          <td><span class="status active">Active</span></td>
+          <td>
+            <a href="#">View</a> | <a href="#">Edit</a>
+          </td>
+        </tr>
+
+        <tr>
+  <td>#11457</td>
+  <td>Sachin Shrestha</td>
+  <td>27</td>
+  <td>Neurology</td>
+  <td>Jan 10, 2024</td>
+  <td><span class="status active">Active</span></td>
+  <td><a href="#">View</a> | <a href="#">Edit</a></td>
+</tr>
+<tr>
+  <td>#11458</td>
+  <td>Maria Johnson</td>
+  <td>34</td>
+  <td>Orthopedics</td>
+  <td>Feb 2, 2024</td>
+  <td><span class="status inactive">Inactive</span></td>
+  <td><a href="#">View</a> | <a href="#">Edit</a></td>
+</tr>
+<tr>
+  <td>#11459</td>
+  <td>Robert Brown</td>
+  <td>45</td>
+  <td>Pediatrics</td>
+  <td>Mar 21, 2024</td>
+  <td><span class="status active">Active</span></td>
+  <td><a href="#">View</a> | <a href="#">Edit</a></td>
+</tr>
+<tr>
+  <td>#11460</td>
+  <td>Anjali Koirala</td>
+  <td>29</td>
+  <td>Dermatology</td>
+  <td>Apr 18, 2024</td>
+  <td><span class="status pending">Pending</span></td>
+  <td><a href="#">View</a> | <a href="#">Edit</a></td>
+</tr>
+<tr>
+  <td>#11461</td>
+  <td>James Miller</td>
+  <td>39</td>
+  <td>Radiology</td>
+  <td>May 3, 2024</td>
+  <td><span class="status active">Active</span></td>
+  <td><a href="#">View</a> | <a href="#">Edit</a></td>
+</tr>
+<tr>
+  <td>#11462</td>
+  <td>Emily Carter</td>
+  <td>31</td>
+  <td>General Medicine</td>
+  <td>Jun 12, 2024</td>
+  <td><span class="status inactive">Inactive</span></td>
+  <td><a href="#">View</a> | <a href="#">Edit</a></td>
+</tr>
+<tr>
+  <td>#11463</td>
+  <td>Bikash Rai</td>
+  <td>22</td>
+  <td>Cardiology</td>
+  <td>Jul 7, 2024</td>
+  <td><span class="status pending">Pending</span></td>
+  <td><a href="#">View</a> | <a href="#">Edit</a></td>
+</tr>
+<tr>
+  <td>#11464</td>
+  <td>Linda Martinez</td>
+  <td>41</td>
+  <td>Neurology</td>
+  <td>Aug 19, 2024</td>
+  <td><span class="status active">Active</span></td>
+  <td><a href="#">View</a> | <a href="#">Edit</a></td>
+</tr>
+<tr>
+  <td>#11465</td>
+  <td>David Kim</td>
+  <td>36</td>
+  <td>Orthopedics</td>
+  <td>Sep 25, 2024</td>
+  <td><span class="status inactive">Inactive</span></td>
+  <td><a href="#">View</a> | <a href="#">Edit</a></td>
+</tr>
+
+
+
+      </tbody>
+   
+
+   </div>
+</body>
+</html>

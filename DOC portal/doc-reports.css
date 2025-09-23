@@ -1,0 +1,101 @@
+nav{
+    background: white;
+}
+
+body{
+    background-color: rgb(221, 241, 255);
+    margin: 0 0 0;
+}
+
+.reports-records-container {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card-section {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 1px 10px 10px rgba(0,0,0,0.05);
+}
+
+.card-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* Report cards */
+.report-card, .record-card {
+  background: #fafafa;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.report-card {
+  position: relative;
+}
+
+.status {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.status.pending {
+  background: #fff7e6;
+  color: #b8860b;
+}
+
+.status.reviewed {
+  background: #e8f8ed;
+  color: #28a745;
+}
+
+.actions {
+  margin-top: 10px;
+}
+
+.actions a {
+  margin-right: 15px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.actions a:hover {
+  text-decoration: underline;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: white;
+}
+
+.btn.blue {
+  background: #007bff;
+}
+
+.btn.green {
+  background: #28a745;
+}
+
+.btn.purple {
+  background: #6f42c1;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}

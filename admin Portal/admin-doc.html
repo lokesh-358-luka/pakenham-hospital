@@ -1,0 +1,95 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+       <meta name="viewport" content="width= device-width, initial-scale=1.0" />
+       <link rel="icon" type="image/png" href="logo.png">
+       <link rel="stylesheet" href="admin.css">
+       <link rel="stylesheet" href="admin-doc.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>Admin Portal</title>
+</head>
+<body>
+    <div class="nav">
+        <ul class="nav1">
+       <li class="nava">
+        <img src="logo.png" alt="Loading" height="40" width="40">
+       <h2>Packenham Admin</h2></li>
+         <li class="navb"> 
+        <div class="avatar blue">PP</div>
+              <div>
+                <strong>Admin</strong><br>
+                <small>Admin@gmail.com</small>
+              </div>
+        </ul>
+
+        <hr>
+    </div>
+
+<div class="whole">
+<!-- side bar -->
+ <div class="sidebar">
+    <h2>Dashboard</h2>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="admin-patients.html">Patients</a></li>
+      <li><a href="admin-doc.html">Doctors</a></li>
+      <li><a href="appoint.html">Appointments</a></li>
+      <li><a href="staff.html">Staff Management</a></li>
+      <li><a href="departments.html">Departments</a></li>
+      <li><a href="reports.html">Reports</a></li>
+      <li><a href="settings.html">Settings</a></li>
+    </ul>
+  </div>
+
+  <!-- main content -->
+   <div class="main-content">
+    <header class="header">
+        <div>
+        <h1>Doctor Overview</h1>
+        </div>
+    
+    </header>
+
+
+<br>
+<br>
+<div class="grid-container" id="doctorGrid">
+
+
+</div>
+   </div>
+</body>
+</html>
+
+<script>
+const doctors = [
+  { name: "Dr. Aisha Khan", role: "Neurologist", email: "aisha.khan@hospital.com", gender: "women" },
+  { name: "Dr. Marcus Lee", role: "Orthopedic Surgeon", email: "marcus.lee@hospital.com", gender: "men" },
+  { name: "Dr. Sofia Mendes", role: "Pediatrician", email: "sofia.mendes@hospital.com", gender: "women" },
+  { name: "Dr. Ethan Brooks", role: "Radiologist", email: "ethan.brooks@hospital.com", gender: "men" },
+  { name: "Dr. Priya Desai", role: "Dermatologist", email: "priya.desai@hospital.com", gender: "women" },
+  { name: "Dr. Noah Kim", role: "Oncologist", email: "noah.kim@hospital.com", gender: "men" }
+];
+
+const grid = document.getElementById("doctorGrid");
+
+doctors.forEach(doc => {
+  const randomId = Math.floor(Math.random() * 100); // 0–99
+  const imageUrl = `https://randomuser.me/api/portraits/${doc.gender}/${randomId}.jpg`;
+
+  const card = document.createElement("div");
+  card.className = "profile-card";
+
+  card.innerHTML = `
+    <div class="profile-image">
+      <img src="${imageUrl}" alt="${doc.name}">
+    </div>
+    <h2 class="profile-name">${doc.name}</h2>
+    <p class="profile-role">${doc.role}</p>
+    <p class="profile-email">${doc.email}</p>
+    <button class="profile-button">View Profile</button>
+  `;
+
+  grid.appendChild(card);
+});
+</script>
