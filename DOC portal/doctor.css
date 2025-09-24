@@ -8,7 +8,24 @@ body{
     background-color: rgb(255, 255, 255);
 }
 
+.sign-in{
+    background: skyblue;
+    padding: 5px;
+    border-radius: 3px;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sign-in:hover{
+    background: #ffeaa7;
+    transform: translateY(-8px) scale(1.03); /* Pop out */
+}
+
+
         .heading1{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
             .style{
             text-align: left;
             display: flex;
@@ -63,6 +80,11 @@ body{
     color: black;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+ }
+
+ .dashboard:hover{
+    transform: translateY(-8px) scale(1.03); /* Pop out */
  }
 
 .card{
@@ -73,9 +95,11 @@ body{
     border-radius: 12px;
     box-shadow: 0 4px 8px black;
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .card:hover{
     background-color: #ffeaa7;
+     transform: translateY(-8px) scale(1.03); /* Pop out */
 }
 
 .main-section{
