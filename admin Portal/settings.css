@@ -1,7 +1,6 @@
 body {
   background-color: #f0f4f8;
-  margin: 0;
-  padding: 20px;
+  margin: 0 0;
 }
 
 .settings-section {
@@ -46,6 +45,7 @@ body {
   margin: 0 0 8px;
   font-size: 18px;
   color: #34495e;
+  align-items: center;
 }
 
 .text-wrapper ul {
@@ -53,8 +53,21 @@ body {
   padding-left: 20px;
   color: #555;
   font-size: 14px;
+  list-style: none;
 }
 
 .text-wrapper li {
   margin-bottom: 6px;
+  background: white;
+  padding:2rem;
+  display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 2rem;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+border-radius: 10px;
+}
+
+.text-wrapper li:hover{
+   transform: translateY(-8px) scale(1.03); /* Pop out */
+   background: #dfdfdf;
 }
