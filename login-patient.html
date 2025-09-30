@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css.css">
+     <link rel="icon" type="image/png" href="logo.png">
+    <title>patient Login Form</title></head>
+<body>
+
+  
+  <div class="login-details">
+    <form action="action_page.php" method="post">
+  <div class="imgcontainer">
+     <div class="skip"> <a href="Pecient/home.html">Skip</a></div>
+    <img src="logo.png" alt="Avatar" class="avatar">
+    
+  </div>
+
+  <div class="container">
+    <label for="uname"><b>Patient Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Patient Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit">Login as Patient</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button><br>
+    <span class="psw"> <a href="#"> Forget password?</a></span>
+  </div>
+</form>
+  </div>
+
+
+</body>
+</html>

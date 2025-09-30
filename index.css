@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .notification { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+body{
+    background: rgb(255, 255, 255);
+    backdrop-filter: blur(80px);
+}
+
+.container{
+   background: rgb(219, 219, 219);
+   margin: 4rem;
+   border-radius: 1rem;
+   transition: transform 0.8s ease;
+   margin-left: 7rem;
+   margin-right: 7rem;
+}
+.container:hover{
+     transform: scale(1.1);
+}
+
+.first-heading{
+    font-size: 2rem;
+    font-weight: bolder;
+    padding-top: 5rem;
+    text-align: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+
+.second-heading{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 3rem;
+
+}
+
+.third-heading{
+    text-align: center;
+}
+.icon{
+    justify-content: center;
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+li{
+    align-items: center;
+    row-gap: 5px;
+}
+
+img{
+    height: 200px;
+    width: 200px;
+    border-radius: 2rem;
+    transition: transform 0.3s ease;
+
+}
+
+
+img:hover {
+  transform: scale(1.1); /* slight zoom effect */
+}
+
+.hover-text {
+  position: absolute;
+  bottom: -25px;            /* place below image */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.icon-box:hover .hover-text {
+  opacity: 1;
+}
+
+footer{
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 1rem;
+}

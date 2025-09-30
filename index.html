@@ -1,51 +1,57 @@
 <html>
-<head>
-    <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css.css">
-     <link rel="icon" type="image/png" href="logo.png">
-    <title>Log-in Form</title></head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+       <meta name="viewport" content="width= device-width, initial-scale=1.0" />
+       <link rel="stylesheet" href="index.css">
+       <link rel="icon" type="image/png" href="logo.png">
+        <title>
+            Welcome to Pakenham Hospitlal Portal
+        </title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="first-heading">
+                <h1><strong>Welcome to the Future of Pakenham Hospital Online</strong></h1>
+            </div>
 
-  
-  <div class="login-details">
-    <form action="action_page.php" method="post">
-  <div class="imgcontainer">
-     <div class="skip"> <a href="home.html">Skip</a></div>
-    <img src="logo.png" alt="Avatar" class="avatar">
-    
-  </div>
+            <div class="second-heading">Our system enhances efficiency and effectiveness in healthcare delivery for a healthier future.<br>Enhancing Patient Care Efficiency</div>
+            
+            <div class="third-heading"> <h2><strong>Identify Yourself, And choose the below Icon</strong></h2></div>
+            <br>
+            <ul class="icon">
+                <li>
+                    <div class="icon-box">
+                    <a href="login-patient.html"><img src="icon/patient1.jpg" alt="Loading"></a>
+                    <span class="hover-text"> Patient</span>
+                    </div>
+                </li>
 
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+                <li>
+                    <div class="icon-box">
+                   <a href="login-doctor.html"> <img src="icon/doc.jpg" alt="Loading"></a>
+                    <span class="hover-text"> Doctors</span>
+                    </div>
+                </li>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
 
-    <button type="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
+                <li>
+                    <div class="icon-box">
+                    <a href="login-admin.html"><img src="icon/admin.jpg" alt="Loading"></a>
+                    <span class="hover-text"> Admin</span>
+                    </div>
+                </li>
+                
+            </ul>
+<br>
+<br>
+<br>
+<footer>
+    <div class="footer1">Get in touch for more information today!</div>
+    <div class="footer2"> All the Rights has been reserved to &copy; Pakenham Hospital.
+</footer>
+            
 
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button><br>
-    <span class="psw"> <a href="#"> Forget password?</a></span>
-  </div>
-</form>
-  </div>
-
-<div class="portal">
-  <div class="card">
-    <h2><a href="Pecient/home.html">Log in as Patients</a></h2>
-  </div>
-<div class="card">
-    <h2><a href="DOC portal/doctor.html">Log in as Doctor</a></h2>
-  </div>
-  <div class="card">
-    <h2><a href="admin Portal/dashboard.html">Log in as Admin</a></h2>
-  </div>
-</div>
-</body>
+        </div>
+        
+    </body>
 </html>
